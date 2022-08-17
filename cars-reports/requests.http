@@ -10,7 +10,7 @@ Content-Type: application/json
 
 ### find User
 
-GET http://localhost:4000/auth/2
+GET http://localhost:4000/auth/8
 
 
 ### find all user by email
@@ -20,7 +20,7 @@ GET http://localhost:4000/auth?email=abc@gmail.com
 
 ### delete user by id
 
-DELETE http://localhost:4000/auth/1
+DELETE http://localhost:4000/auth/2
 
 ### update user by id
 
