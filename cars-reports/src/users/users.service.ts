@@ -24,7 +24,7 @@ export class UsersService {
   async update(id: number, attrs: Partial<User>) {
     const user = await this.repo.findOne({ where: { id } });
     if (!user) {
-      throw new NotFoundException('User not found updated');
+      throw new NotFoundException('User not found when updated');
     }
     Object.assign(user, attrs);
     return this.repo.save(user);

@@ -8,9 +8,15 @@ Content-Type: application/json
   "password": "1231321"
 }
 
-### find User
+### sign in for user
 
-GET http://localhost:4000/auth/8
+POST http://localhost:4000/auth/signin
+Content-Type: application/json
+
+{
+  "email": "abc@gmail.com",
+  "password": "1231321"
+}
 
 
 ### find all user by email
@@ -18,9 +24,17 @@ GET http://localhost:4000/auth/8
 GET http://localhost:4000/auth?email=abc@gmail.com
 
 
+### find User
+
+GET http://localhost:4000/auth/2
+
+
+
+
+
 ### delete user by id
 
-DELETE http://localhost:4000/auth/2
+DELETE http://localhost:4000/auth/11
 
 ### update user by id
 
