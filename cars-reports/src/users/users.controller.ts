@@ -5,6 +5,7 @@ import {
 import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
 
 @Controller('auth')
@@ -18,7 +19,7 @@ export class UsersController {
   }
 
   // @UseInterceptors(ClassSerializerInterceptor)
-  @UseInterceptors(SerializeInterceptor)
+  @UseInterceptors(new SerializeInterceptor(UserDto))
   @Get('/:id')
   async findUser(@Param('id') id: string) {
     console.log("handling ...");
@@ -29,6 +30,7 @@ export class UsersController {
     return user;
   }
 
+  @UseInterceptors(new SerializeInterceptor(UserDto))
   @Get()
   findAllUserByEmail(@Query('email') email: string) {
     return this.usersService.findByEmail(email);
