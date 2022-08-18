@@ -3,9 +3,13 @@ import { CallHandler, ExecutionContext, NestInterceptor, UseInterceptors } from 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
-import { UserDto } from 'src/users/dto/user.dto';
 
-export function Serialize (dto: any) {
+
+interface ClassCondtructor {
+  new (...arg: any[]): {}
+}
+
+export function Serialize (dto: ClassCondtructor) {
   return UseInterceptors(new SerializeInterceptor(dto));
 }
 
