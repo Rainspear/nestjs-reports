@@ -5,11 +5,11 @@ import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 
 
-interface ClassCondtructor {
+interface ClassConstructor { // make sure this type will be a class
   new (...arg: any[]): {}
 }
 
-export function Serialize (dto: ClassCondtructor) {
+export function Serialize (dto: ClassConstructor) {
   return UseInterceptors(new SerializeInterceptor(dto));
 }
 

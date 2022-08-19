@@ -14,7 +14,7 @@ import { UsersService } from './users.service';
 // order sensitive
 @Controller('auth')
 @Serialize(UserDto) // applycall response with interceptor and dto
-@UseInterceptors(CurrentUserInterceptor)
+// @UseInterceptors(CurrentUserInterceptor) // already apply globaly in users module
 export class UsersController {
   constructor(
     private usersService: UsersService,
