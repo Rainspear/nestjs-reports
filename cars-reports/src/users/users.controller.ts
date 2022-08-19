@@ -1,5 +1,5 @@
 import {
-  Body, Controller, Get, Post, Param, Query, Delete, Patch, NotFoundException, Session,
+  Body, Controller, Get, Post, Param, Query, Delete, Patch, NotFoundException, Session, UseInterceptors,
 } from '@nestjs/common';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { AuthService } from './auth.servce';
@@ -7,9 +7,14 @@ import { currentUser } from './decorators/current-user.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserDto } from './dto/user.dto';
+import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
+import { User } from './user.entity';
 import { UsersService } from './users.service';
+
+// order sensitive
 @Controller('auth')
 @Serialize(UserDto) // applycall response with interceptor and dto
+@UseInterceptors(CurrentUserInterceptor)
 export class UsersController {
   constructor(
     private usersService: UsersService,
@@ -36,7 +41,7 @@ export class UsersController {
   }
 
   @Get('/whoami')
-  getCurrentUser(@Session() session: any, @currentUser() currentUser) {
+  getCurrentUser(@Session() session: any, @currentUser() currentUser : User) {
     console.log("currentUser", currentUser);
     return this.usersService.findOne(session.userId);
   }
