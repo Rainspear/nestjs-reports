@@ -14,7 +14,7 @@ POST http://localhost:4000/auth/signin
 Content-Type: application/json
 
 {
-  "email": "abc@gmail.com",
+  "email": "test@gmail.com",
   "password": "1231321"
 }
 
@@ -24,17 +24,21 @@ Content-Type: application/json
 GET http://localhost:4000/auth?email=abc@gmail.com
 
 
+### get current user
+
+GET http://localhost:4000/auth/whoami
+
+
+
 ### find User
 
 GET http://localhost:4000/auth/2
 
 
-
-
-
 ### delete user by id
 
 DELETE http://localhost:4000/auth/11
+
 
 ### update user by id
 

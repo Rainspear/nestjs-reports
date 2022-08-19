@@ -12,6 +12,7 @@ export class AuthService {
   async signup(email: string, password: string) {
     // check is email exist
     const users = await this.usersService.findByEmail(email);
+    console.log("users", users);
     if (users.length) {
       throw new BadRequestException("User is existed");
     }
