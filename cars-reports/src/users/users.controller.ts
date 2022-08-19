@@ -3,11 +3,11 @@ import {
 } from '@nestjs/common';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { AuthService } from './auth.servce';
+import { currentUser } from './decorators/current-user.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
-
 @Controller('auth')
 @Serialize(UserDto) // applycall response with interceptor and dto
 export class UsersController {
@@ -24,14 +24,20 @@ export class UsersController {
   }
 
   @Post('/signin')
-  async signin(@Body() body: CreateUserDto, @Session() session: any) {
+  async signIn(@Body() body: CreateUserDto, @Session() session: any) {
     const user = await this.authService.signin(body.email, body.password);
     session.userId = user.id;
     return user;
   }
 
+  @Post('/signout')
+  async signOut(@Session() session: any) {
+    session.userId = null;
+  }
+
   @Get('/whoami')
-  getCurrentUser(@Session() session: any) {
+  getCurrentUser(@Session() session: any, @currentUser() currentUser) {
+    console.log("currentUser", currentUser);
     return this.usersService.findOne(session.userId);
   }
 
